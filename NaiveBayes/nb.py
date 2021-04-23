@@ -36,7 +36,12 @@ class NaiveBayes :
         return self._classes[np.argmax(posteriors)]
     
     def predict(self, X):
-        predicted_y = [self.predict_each(x) for x in X]
+        if isinstance(X, np.float64):
+            dataset = X
+        else:
+            dataset = X.to_numpy('float64')
+             
+        predicted_y = [self.predict_each(x) for x in dataset]
         return predicted_y
 
     
